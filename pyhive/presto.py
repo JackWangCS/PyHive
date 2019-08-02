@@ -18,7 +18,7 @@ import getpass
 import logging
 import requests
 from requests.auth import HTTPBasicAuth
-from requests_kerberos import HTTPKerberosAuth, OPTIONAL
+from requests_kerberos import HTTPKerberosAuth, REQUIRED
 import os
 
 try:  # Python 3
@@ -150,7 +150,7 @@ class Cursor(common.DBAPICursor):
             if KerberosCredentialCachePath is not None:
                 os.environ['KRB5CCNAME'] = KerberosCredentialCachePath
 
-            requests_kwargs['auth'] = HTTPKerberosAuth(mutual_authentication=OPTIONAL,
+            requests_kwargs['auth'] = HTTPKerberosAuth(mutual_authentication=REQUIRED,
                                                        principal=KerberosPrincipal,
                                                        service=KerberosRemoteServiceName,
                                                        hostname_override=hostname_override)
